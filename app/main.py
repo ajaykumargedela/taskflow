@@ -10,10 +10,21 @@ templates = Jinja2Templates(directory="app/templates")
 
 Base.metadata.create_all(bind=engine)
 
-
 @app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+def home():
+    return """
+    <html>
+        <head><title>TaskFlow</title></head>
+        <body>
+            <h1>TaskFlow App</h1>
+            <form action="/submit" method="post">
+                <input type="text" name="title" placeholder="Enter title" required><br><br>
+                <input type="text" name="description" placeholder="Enter description" required><br><br>
+                <button type="submit">Save Task</button>
+            </form>
+        </body>
+    </html>
+    """
 
 
 @app.post("/submit")
