@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskflow-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskflow
+  template:
+    metadata:
+      labels:
+        app: taskflow
+    spec:
+      containers:
+      - name: taskflow
+        image: asia-south1-docker.pkg.dev/eco-emissary-496007-c7/task-repo/taskflow-app:v1
+        ports:
+        - containerPort: 8080
